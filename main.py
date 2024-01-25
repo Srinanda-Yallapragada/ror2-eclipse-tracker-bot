@@ -1,4 +1,4 @@
-# requires the 'message_content' intent.
+# requires the 'message_content' intent
 import json  # needed to read secrets for discord bot token
 from enum import Enum
 
@@ -8,10 +8,12 @@ from discord.ext import commands
 from pymongo import MongoClient
 
 client = MongoClient("mongodb://localhost:27017/")
-
-# discord userid are now unique, meaning in the database, "userid" column will be a unique identifier
+# discord userid are now unique, meaning in the database,
+# "userid" column will be a unique identifier
 database = client.ror2_eclipse_tracker_db
-collection = database.eclipse_levels
+col = database.eclipse_levels
+
+NUM_SURVIVORS = 13
 
 
 class Survivors(Enum):
@@ -21,14 +23,13 @@ class Survivors(Enum):
     CAPTAIN = 3
     COMMANDO = 4
     ENGINEER = 5
-    HERETIC = 6
-    HUNTRESS = 7
-    LOADER = 8
-    MUL_T = 9
-    MERCENARY = 10
-    REX = 11
-    RAILGUNNER = 12
-    VOID_FIEND = 13
+    HUNTRESS = 6
+    LOADER = 7
+    MUL_T = 8
+    MERCENARY = 9
+    REX = 10
+    RAILGUNNER = 11
+    VOID_FIEND = 12
 
     @classmethod
     def has_key(cls, name):
@@ -52,32 +53,44 @@ async def whoami(ctx):
 
 
 # Expected one time usecase for uploading all current levels in one command
-# this is to be updated to be more userfriendly, but this will do for now
 @bot.command()
-async def insert_all_levels(ctx, levels):
-    res = collection.find_one({"userid": str(ctx.author)})
+async def insert_all_levels(ctx):
+    res = col.find_one({"userid": str(ctx.author)})
     if res:
-        await ctx.send("You already have uploaded you eclipse levels!")
+        await ctx.send(
+            "You already used this command once! Use !update_survivor instead"
+        )
         return
 
-    levels = [int(i) for i in levels]  # conevrting string to int
-    collection.insert_one({"userid": str(ctx.author), "levels": levels})
-    await ctx.send("Levels for user" + str(ctx.author) + " had been added")
+    user_levels = [1] * NUM_SURVIVORS
+
+    def check(m):
+        return int(m.content) > 0 and int(m.content) < 10
+
+    for survivor in Survivors:
+        await ctx.send("Input " + survivor.name + " eclipse level.")
+        msg = await bot.wait_for("message", check=check, timeout=30)
+        user_levels[survivor.value] = int(msg.content)
+
+    col.insert_one({"userid": str(ctx.author), "levels": user_levels})
+    await ctx.send("Levels for user " + str(ctx.author) + " had been added")
 
 
-# this is to be updated to be more user friendly, but this will do for now
 @bot.command()
 async def get_my_levels(ctx):
-    res = collection.find_one({"userid": str(ctx.author)})
+    res = col.find_one({"userid": str(ctx.author)})
     if res:
         user_levels = res["levels"]
-        print(user_levels)
         # formmating return data
         ret_string = "Eclipse levels for " + str(ctx.author) + "\n"
         for survivor in Survivors:
             ret_string += survivor.name
             ret_string += " - "
-            ret_string += str(user_levels[survivor.value])
+            ret_string += (
+                "completed"
+                if (user_levels[survivor.value]) == 9
+                else str(user_levels[survivor.value])
+            )
             ret_string += "\n"
 
         await ctx.send(ret_string)
@@ -85,40 +98,42 @@ async def get_my_levels(ctx):
         await ctx.send("You do not have an entry in the database")
 
 
-async def valid_for_update(ctx, survivor, level):
+async def valid_input_for_update(ctx, survivor, level):
     # convert to uppercase for Survivor Enum
     survivor = survivor.upper()
     # Check if survivor exsists
     if not Survivors.has_key(survivor):
-        await ctx.send("This survivor does not exsist")
+        await ctx.send("This survivor does not exsist. \n")
         return False
 
     if not level.isdigit():
-        await ctx.send(str(level) + " is an invalid value for level")
+        await ctx.send(str(level) + " is an invalid value for level. \n")
         return False
+
+    elif not (int(level) < 10) and (int(level) > 0):
+        await ctx.send(str(level) + " must be between 1 and 9 inclusive. \n")
+        return False
+
     return True
 
 
 @bot.command()
 async def update_survivor(ctx, survivor, level):
-    if valid_for_update(ctx, survivor, level):
+    if await valid_input_for_update(ctx, survivor, level):
         survivor = survivor.upper()
         level = int(level)
     else:
-        ctx.send("Invalid command syntax. Please try again!")
+        await ctx.send("Invalid command. Please try again!")
         return
 
-    res = collection.find_one({"userid": str(ctx.author)})
+    res = col.find_one({"userid": str(ctx.author)})
 
     if res:
-        # isolate current levels from result
         user_levels = res["levels"]
-        # update the particular survivors eclipse level
         user_levels[Survivors[survivor].value] = level
+
         # update in database
-        collection.update_one(
-            {"userid": str(ctx.author)}, {"$set": {"levels": user_levels}}
-        )
+        col.update_one({"userid": str(ctx.author)}, {"$set": {"levels": user_levels}})
 
         await ctx.send(
             "Updated "
@@ -130,7 +145,7 @@ async def update_survivor(ctx, survivor, level):
         )
 
     else:
-        print("First user !insert_all_data to initilize your eclipse levels")
+        print("First use !insert_all_data to initilize your eclipse levels")
 
 
 # gets discord bot token from Secrets.json
