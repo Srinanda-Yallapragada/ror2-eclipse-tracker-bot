@@ -1,39 +1,18 @@
 # requires the 'message_content' intent
 import json  # needed to read secrets for discord bot token
-from enum import Enum
 
 import discord
 from discord.ext import commands
 
 from pymongo import MongoClient
 
+from .survivor_enum import Survivors, NUM_SURVIVORS
+
 client = MongoClient("mongodb://localhost:27017/")
 # discord userid are now unique, meaning in the database,
 # "userid" column will be a unique identifier
 database = client.ror2_eclipse_tracker_db
 col = database.eclipse_levels
-
-NUM_SURVIVORS = 13
-
-
-class Survivors(Enum):
-    ACRID = 0
-    ARTIFICER = 1
-    BANDIT = 2
-    CAPTAIN = 3
-    COMMANDO = 4
-    ENGINEER = 5
-    HUNTRESS = 6
-    LOADER = 7
-    MUL_T = 8
-    MERCENARY = 9
-    REX = 10
-    RAILGUNNER = 11
-    VOID_FIEND = 12
-
-    @classmethod
-    def has_key(cls, name):
-        return name in cls.__members__
 
 
 intents = discord.Intents.default()
