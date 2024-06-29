@@ -18,25 +18,24 @@ pub enum Survivors {
 }
 
 impl Survivors {
-    pub fn index_to_survivor(index: usize) -> Option<Self> {
+    pub fn index_to_survivor(index: usize) -> Self {
         match index {
-            0 => Some(Survivors::Acrid),
-            1 => Some(Survivors::Artificer),
-            2 => Some(Survivors::Bandit),
-            3 => Some(Survivors::Captain),
-            4 => Some(Survivors::Commando),
-            5 => Some(Survivors::Engineer),
-            6 => Some(Survivors::Huntress),
-            7 => Some(Survivors::Loader),
-            8 => Some(Survivors::MulT),
-            9 => Some(Survivors::Mercenary),
-            10 => Some(Survivors::Rex),
-            11 => Some(Survivors::Railgunner),
-            12 => Some(Survivors::VoidFiend),
-            _ => None,
+            0 => Survivors::Acrid,
+            1 => Survivors::Artificer,
+            2 => Survivors::Bandit,
+            3 => Survivors::Captain,
+            4 => Survivors::Commando,
+            5 => Survivors::Engineer,
+            6 => Survivors::Huntress,
+            7 => Survivors::Loader,
+            8 => Survivors::MulT,
+            9 => Survivors::Mercenary,
+            10 => Survivors::Rex,
+            11 => Survivors::Railgunner,
+            12 => Survivors::VoidFiend,
+            _ => panic!("Invalid survivor index: {}", index),
         }
     }
-
     pub fn survivor_to_name(&self) -> &'static str {
         match self {
             Survivors::Acrid => "Acrid",
