@@ -34,6 +34,7 @@ async fn main(
                 commands::get_survivor_lvls(),
                 commands::set_survivor_eclipse_lvl(),
                 commands::eclipse_class_selector(),
+                commands::survivor_lvl_up(),
             ],
             ..Default::default()
         })

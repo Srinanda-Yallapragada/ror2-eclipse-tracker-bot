@@ -36,6 +36,23 @@ impl Survivors {
             _ => panic!("Invalid survivor index: {}", index),
         }
     }
+    pub fn survivor_to_index(&self) -> usize {
+        match self {
+            Survivors::Acrid => 0,
+            Survivors::Artificer => 1,
+            Survivors::Bandit => 2,
+            Survivors::Captain => 3,
+            Survivors::Commando => 4,
+            Survivors::Engineer => 5,
+            Survivors::Huntress => 6,
+            Survivors::Loader => 7,
+            Survivors::MulT => 8,
+            Survivors::Mercenary => 9,
+            Survivors::Rex => 10,
+            Survivors::Railgunner => 11,
+            Survivors::VoidFiend => 12,
+        }
+    }
     pub fn survivor_to_name(&self) -> &'static str {
         match self {
             Survivors::Acrid => "Acrid",
