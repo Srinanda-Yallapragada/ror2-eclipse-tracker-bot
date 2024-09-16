@@ -15,6 +15,9 @@ pub enum Survivors {
     Rex = 10,
     Railgunner = 11,
     VoidFiend = 12,
+    Seeker = 13,
+    FalseSon = 14,
+    Chef = 15,
 }
 
 impl Survivors {
@@ -33,6 +36,9 @@ impl Survivors {
             10 => Survivors::Rex,
             11 => Survivors::Railgunner,
             12 => Survivors::VoidFiend,
+            13 => Survivors::Seeker,
+            14 => Survivors::FalseSon,
+            15 => Survivors::Chef,
             _ => panic!("Invalid survivor index: {}", index),
         }
     }
@@ -51,6 +57,9 @@ impl Survivors {
             Survivors::Rex => 10,
             Survivors::Railgunner => 11,
             Survivors::VoidFiend => 12,
+            Survivors::Seeker => 13,
+            Survivors::FalseSon => 14,
+            Survivors::Chef => 15,
         }
     }
     pub fn survivor_to_name(&self) -> &'static str {
@@ -68,6 +77,9 @@ impl Survivors {
             Survivors::Rex => "Rex",
             Survivors::Railgunner => "Railgunner",
             Survivors::VoidFiend => "VoidFiend",
+            Survivors::Seeker => "Seeker",
+            Survivors::FalseSon => "FalseSon",
+            Survivors::Chef => "Chef",
         }
     }
 
@@ -86,6 +98,9 @@ impl Survivors {
             "Rex" => Some(Survivors::Rex),
             "Railgunner" => Some(Survivors::Railgunner),
             "VoidFiend" => Some(Survivors::VoidFiend),
+            "Seeker" => Some(Survivors::Seeker),
+            "FalseSon" => Some(Survivors::FalseSon),
+            "Chef" => Some(Survivors::Chef),
             _ => None,
         }
     }

@@ -61,7 +61,10 @@ pub async fn set_survivor_eclipse_lvl(
         "Mercenary",
         "Rex",
         "Railgunner",
-        "VoidFiend"
+        "VoidFiend",
+        "Seeker",
+        "FalseSon",
+        "Chef"
     )]
     selection: &'static str,
     #[description = "What level to update to? Set level to 9 if you have completed all levels."]
@@ -165,7 +168,10 @@ pub async fn survivor_lvl_up(
         "Mercenary",
         "Rex",
         "Railgunner",
-        "VoidFiend"
+        "VoidFiend",
+        "Seeker",
+        "FalseSon",
+        "Chef"
     )]
     selection: &'static str,
 ) -> Result<(), Error> {
