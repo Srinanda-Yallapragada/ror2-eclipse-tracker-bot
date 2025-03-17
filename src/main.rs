@@ -10,16 +10,7 @@ mod survivor_enum;
 
 pub struct Data {
     pub database: PgPool,
-} // User data, which is stored and accessible in all command invocations
-  // type Error = Box<dyn std::error::Error + Send + Sync>;
-  // type Context<'a> = poise::Context<'a, Data, Error>;
-
-// /// Responds with "world!"
-// #[poise::command(slash_command)]
-// async fn hello(ctx: Context<'_>) -> Result<(), Error> {
-//     ctx.say("world!").await?;
-//     Ok(())
-// }
+}
 
 #[shuttle_runtime::main]
 async fn main(
