@@ -18,6 +18,8 @@ async fn main(
     #[shuttle_runtime::Secrets] secret_store: SecretStore,
 ) -> ShuttleSerenity {
     // Get the discord token set in `Secrets.toml`
+    // you need to reset the token everytime you lose it from the 
+    // developer portal
     let discord_token = secret_store
         .get("DISCORD_TOKEN")
         .context("'DISCORD_TOKEN' was not found")?;
