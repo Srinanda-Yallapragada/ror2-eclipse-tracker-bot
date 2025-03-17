@@ -109,16 +109,16 @@ pub async fn set_survivor_eclipse_lvl(
 pub async fn eclipse_class_selector(
     ctx: Context<'_>,
     #[description = "Username of user 1."]
-    #[choices("ehnanda", "gamerunicorn.", "prnvs", "thatprofessor", "None")]
+    #[choices("obama5542", "nanx4", "romir.k", "ehnanda", "gamerunicorn.", "prnvs", "thatprofessor", "None")]
     user0: &str,
     #[description = "Username of user 2."]
-    #[choices("ehnanda", "gamerunicorn.", "prnvs", "thatprofessor", "None")]
+    #[choices("obama5542", "nanx4", "romir.k", "ehnanda", "gamerunicorn.", "prnvs", "thatprofessor", "None")]
     user1: &str,
     #[description = "Username of user 3."]
-    #[choices("ehnanda", "gamerunicorn.", "prnvs", "thatprofessor", "None")]
+    #[choices("obama5542", "nanx4", "romir.k", "ehnanda", "gamerunicorn.", "prnvs", "thatprofessor", "None")]
     user2: &str,
     #[description = "Username of user 4."]
-    #[choices("ehnanda", "gamerunicorn.", "prnvs", "thatprofessor", "None")]
+    #[choices("obama5542", "nanx4", "romir.k", "ehnanda", "gamerunicorn.", "prnvs", "thatprofessor", "None")]
     user3: &str,
 ) -> Result<(), Error> {
     let users = vec![user0, user1, user2, user3]
