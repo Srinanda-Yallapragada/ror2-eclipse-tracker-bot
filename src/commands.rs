@@ -159,6 +159,8 @@ pub async fn survivor_lvl_up(
     #[description = "Which survivor do you want to level up by 1?"]
     //Poise only supports choice types that can be constructed from a literal
     // (https://doc.rust-lang.org/reference/expressions/literal-expr.html).
+
+    //on new survivor update here
     #[choices(
         "Acrid",
         "Artificer",
@@ -175,7 +177,9 @@ pub async fn survivor_lvl_up(
         "VoidFiend",
         "Seeker",
         "FalseSon",
-        "Chef"
+        "Chef",
+        "Operator",
+        "Drifter"
     )]
     selection: &'static str,
 ) -> Result<(), Error> {
