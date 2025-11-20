@@ -18,6 +18,8 @@ pub enum Survivors {
     Seeker = 13,
     FalseSon = 14,
     Chef = 15,
+    Operator = 16,
+    Drifter = 17,
 }
 
 impl Survivors {
@@ -60,6 +62,8 @@ impl Survivors {
             Survivors::Seeker => 13,
             Survivors::FalseSon => 14,
             Survivors::Chef => 15,
+            Survivors::Operator => 16,
+            Survivors::Drifter => 17,
         }
     }
     pub fn survivor_to_name(&self) -> &'static str {
@@ -80,6 +84,8 @@ impl Survivors {
             Survivors::Seeker => "Seeker",
             Survivors::FalseSon => "FalseSon",
             Survivors::Chef => "Chef",
+            Survivors::Operator => "Operator",
+            Survivors::Drifter => "Drifter",
         }
     }
 
@@ -101,6 +107,8 @@ impl Survivors {
             "Seeker" => Some(Survivors::Seeker),
             "FalseSon" => Some(Survivors::FalseSon),
             "Chef" => Some(Survivors::Chef),
+            "Operator" => Some(Survivors::Operator),
+            "Drifter" => Some(Survivors::Drifter),
             _ => None,
         }
     }
