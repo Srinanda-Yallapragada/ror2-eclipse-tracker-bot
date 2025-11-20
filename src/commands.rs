@@ -64,7 +64,9 @@ pub async fn set_survivor_eclipse_lvl(
         "VoidFiend",
         "Seeker",
         "FalseSon",
-        "Chef"
+        "Chef",
+        "Operator",
+        "Drifter"
     )]
     selection: &'static str,
     #[description = "What level to update to? Set level to 9 if you have completed all levels."]

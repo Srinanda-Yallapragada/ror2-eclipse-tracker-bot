@@ -1,6 +1,6 @@
 use core::fmt;
 
-pub const NUM_SURVIVORS: usize = 16;
+pub const NUM_SURVIVORS: usize = 18;
 pub enum Survivors {
     Acrid = 0,
     Artificer = 1,
