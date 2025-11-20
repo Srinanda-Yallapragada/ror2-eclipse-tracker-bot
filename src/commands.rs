@@ -48,6 +48,8 @@ pub async fn set_survivor_eclipse_lvl(
     #[description = "Which survivor do you want to update?"]
     //Poise only supports choice types that can be constructed from a literal
     // (https://doc.rust-lang.org/reference/expressions/literal-expr.html).
+
+    //on new survivor update here
     #[choices(
         "Acrid",
         "Artificer",

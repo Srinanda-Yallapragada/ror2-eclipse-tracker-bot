@@ -1,6 +1,9 @@
 use core::fmt;
 
+//on new survivor update here
 pub const NUM_SURVIVORS: usize = 18;
+
+//on new survivor update here
 pub enum Survivors {
     Acrid = 0,
     Artificer = 1,
@@ -22,6 +25,7 @@ pub enum Survivors {
     Drifter = 17,
 }
 
+//on new survivor update here
 impl Survivors {
     pub fn index_to_survivor(index: usize) -> Self {
         match index {
@@ -41,9 +45,13 @@ impl Survivors {
             13 => Survivors::Seeker,
             14 => Survivors::FalseSon,
             15 => Survivors::Chef,
+            16 => Survivors::Operator,
+            17 => Survivors::Drifter,
             _ => panic!("Invalid survivor index: {}", index),
         }
     }
+
+    //on new survivor update here
     pub fn survivor_to_index(&self) -> usize {
         match self {
             Survivors::Acrid => 0,
@@ -66,6 +74,8 @@ impl Survivors {
             Survivors::Drifter => 17,
         }
     }
+
+    //on new survivor update here
     pub fn survivor_to_name(&self) -> &'static str {
         match self {
             Survivors::Acrid => "Acrid",
@@ -89,6 +99,7 @@ impl Survivors {
         }
     }
 
+    //on new survivor update here
     pub fn name_to_survivor(input: &str) -> Option<Survivors> {
         match input {
             "Acrid" => Some(Survivors::Acrid),
